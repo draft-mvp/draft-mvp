@@ -17,7 +17,7 @@ class PlayerDropdown extends Component {
         <label>
           Pick your player: 
           <select>
-            {this.props.players.map((player) => <option key={player} value={player}>{player}</option>)}
+            {this.props.players ? this.props.players.map((player) => <option key={player} value={player}>{player}</option>) : undefined}
           </select>
         </label>
         <input type="submit" value="Submit" />
