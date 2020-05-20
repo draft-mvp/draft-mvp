@@ -1,3 +1,9 @@
+/*playerList*/
+.playerList {
+  float: right;
+}
+
+/* modal*/
 .modal {
   position: fixed;
   top: 0;

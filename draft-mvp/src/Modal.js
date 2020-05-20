@@ -1,13 +1,15 @@
 import React from "react";
 
-const Modal = ({ showModal, handleCloseModal }) => {
+//populate modal with api data
+const Modal = ({ showModal, handleCloseModal, player }) => {
   const showModalClassName = showModal
     ? "modal display-block"
     : "modal display-none";
   return (
     <div className={showModalClassName}>
       <section className="modal-main">
-        <h3>hello from modal</h3>
+        {/*player picture*/ "player picture"}
+        {player}
         <button onClick={handleCloseModal}>Close</button>
       </section>
     </div>

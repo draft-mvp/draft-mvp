@@ -14,33 +14,40 @@ export default class Player extends Component {
   handleModal = () => {
     console.log(`handlemodal ${this.props.player}`);
     this.setState({
-      showModal: true
+      showModal: !this.state.showModal
     });
   };
 
-  handleCloseModal = () => {
-    console.log("close modal");
-    this.setState({
-      showModal: false
-    });
-  };
+  // handleCloseModal = () => {
+  //   console.log("close modal");
+  //   this.setState({
+  //     showModal: false
+  //   });
+  // };
 
+  //fix so that don't need to render player again, simply render modal if clicked, otherwise need to rerender whole player
+  //list to render modal
   render() {
     const { player } = this.props;
-    const { handleModal, handleCloseModal } = this;
+    const { handleModal } = this;
     const { showModal } = this.state;
     if (showModal) {
       return (
         <div className="player">
+          {/* player number*/ 12 + "  "}
           {player}
-          <Modal showModal={showModal} handleCloseModal={handleCloseModal} />
+          <Modal
+            showModal={showModal}
+            handleCloseModal={handleModal}
+            player={player}
+          />
         </div>
       );
     } else {
       return (
         <div className="player" onClick={handleModal}>
+          {/* player number*/ 12 + "  "}
           {player}
-          {/* <Modal showModal={showModal} handleCloseModal={handleCloseModal} /> */}
         </div>
       );
     }
