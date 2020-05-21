@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import PlayerDropdown from './PlayerDropdown';
 import "./App.css";
-
 import PlayerList from "./PlayerList";
 
 const NBATEAMS = ["Lakers", "Warriors", "Cavs", "Bucks", "Clippers"];
@@ -28,8 +28,12 @@ class App extends Component {
     return (
       <div>
         <h1>Mock Draft</h1>
-        <PlayerList players={players} />
-      </div>
+        <div>
+          <PlayerDropdown nbaTeams={this.state.nbaTeams} college={this.state.college} players={this.state.players}/>
+        </div>
+        <div>
+          <PlayerList players={players} />
+        </div>
     );
   }
 }
