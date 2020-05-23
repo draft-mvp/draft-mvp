@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import PlayerDropdown from './PlayerDropdown';
+import PlayerDropdown from "./PlayerDropdown";
 import "./App.css";
 import PlayerList from "./PlayerList";
+import SearchBar from "./SearchBar";
 
 const NBATEAMS = ["Lakers", "Warriors", "Cavs", "Bucks", "Clippers"];
 const COLLEGE = ["UCLA", "USC", "Duke", "SF State", "UC Berkeley"];
@@ -19,21 +20,43 @@ class App extends Component {
     this.state = {
       nbaTeams: NBATEAMS,
       college: COLLEGE,
-      players: PLAYERS
+      players: PLAYERS,
+      searchInput: "",
+      filteredColleges: []
     };
   }
+  
+  searchOnChange = (e) => {
+     this.setState({
+       searchInput: e.target.value
+     });
+     //creates array of filtered colleges based on search input
+     const filteredColleges = 
+      this.state.college.filter(school => {
+        return school.toLowerCase().includes(this.state.searchInput.toLowerCase());
+      });
+      this.setState({
+        filteredColleges: filteredColleges,
+      });
+      console.log("App component: this.state.filteredColleges ", this.state.filteredColleges);
+   };
 
   render() {
-    const { players } = this.state;
+    const { college, players, nbaTeams, searchInput } = this.state;
+    const { searchOnChange } = this;
     return (
       <div>
         <h1>Mock Draft</h1>
         <div>
-          <PlayerDropdown nbaTeams={this.state.nbaTeams} college={this.state.college} players={this.state.players}/>
+          <SearchBar searchOnChange={searchOnChange} searchInput={searchInput}/>
+        </div>
+        <div>
+          <PlayerDropdown nbaTeams={nbaTeams} college={college} players={players}/>
         </div>
         <div>
           <PlayerList players={players} />
         </div>
+      </div>
     );
   }
 }
