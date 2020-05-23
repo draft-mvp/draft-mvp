@@ -18,13 +18,6 @@ export default class Player extends Component {
     });
   };
 
-  // handleCloseModal = () => {
-  //   console.log("close modal");
-  //   this.setState({
-  //     showModal: false
-  //   });
-  // };
-
   //fix so that don't need to render player again, simply render modal if clicked, otherwise need to rerender whole player
   //list to render modal
   render() {
