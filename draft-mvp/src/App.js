@@ -3,6 +3,7 @@ import "./App.css";
 import PlayerDropdown from "./PlayerDropdown";
 import PlayerList from "./PlayerList";
 import TeamDropdown from "./TeamDropdown";
+import NbaTeam from "./NbaTeam";
 
 const NBATEAMS = ["Lakers", "Warriors", "Cavs", "Bucks", "Clippers"];
 const COLLEGE = ["UCLA", "USC", "Duke", "SF State", "UC Berkeley"];
@@ -20,12 +21,22 @@ class App extends Component {
     this.state = {
       nbaTeams: NBATEAMS,
       college: COLLEGE,
-      players: PLAYERS
+      players: PLAYERS,
+      selectedNbaTeams: []
     };
+    this.handleSelectNbaTeams = this.handleSelectNbaTeams.bind(this);
   }
 
+  //update which nba team to render on page
+  handleSelectNbaTeams = selectedNbaTeam => {
+    this.setState({
+      selectedNbaTeams: this.state.selectedNbaTeams.concat([selectedNbaTeam])
+    });
+  };
+
   render() {
-    const { players, nbaTeams } = this.state;
+    const { players, nbaTeams, selectedNbaTeams } = this.state;
+    const { handleSelectNbaTeams } = this;
     return (
       <div>
         <h1>Mock Draft</h1>
@@ -35,7 +46,11 @@ class App extends Component {
           players={this.state.players}
         />
         <PlayerList players={players} />
-        <TeamDropdown nbaTeams={nbaTeams}/>
+        <TeamDropdown
+          nbaTeams={nbaTeams}
+          handleSelectNbaTeams={handleSelectNbaTeams}
+        />
+        <NbaTeam selectedNbaTeams={selectedNbaTeams} />
       </div>
     );
   }
