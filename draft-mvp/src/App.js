@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PlayerDropdown from './PlayerDropdown';
+import PlayerDropdown from "./PlayerDropdown";
 import "./App.css";
 import PlayerList from "./PlayerList";
 
@@ -28,12 +28,13 @@ class App extends Component {
     return (
       <div>
         <h1>Mock Draft</h1>
-        <div>
-          <PlayerDropdown nbaTeams={this.state.nbaTeams} college={this.state.college} players={this.state.players}/>
-        </div>
-        <div>
-          <PlayerList players={players} />
-        </div>
+        <PlayerDropdown
+          nbaTeams={this.state.nbaTeams}
+          college={this.state.college}
+          players={this.state.players}
+        />
+        <PlayerList players={players} />
+      </div>
     );
   }
 }
