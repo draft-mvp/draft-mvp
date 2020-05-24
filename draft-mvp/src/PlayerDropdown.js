@@ -12,7 +12,6 @@ class PlayerDropdown extends Component {
   render() {
     return (
       <div>
-        Player Dropdown Component!
         <form >
         <label>
           Pick your player: 

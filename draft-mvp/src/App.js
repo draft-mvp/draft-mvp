@@ -4,6 +4,7 @@ import PlayerDropdown from "./PlayerDropdown";
 import PlayerList from "./PlayerList";
 import TeamDropdown from "./TeamDropdown";
 import NbaTeam from "./NbaTeam";
+import SearchBar from "./SearchBar";
 
 const NBATEAMS = ["Lakers", "Warriors", "Cavs", "Bucks", "Clippers"];
 const COLLEGE = ["UCLA", "USC", "Duke", "SF State", "UC Berkeley"];
@@ -22,10 +23,27 @@ class App extends Component {
       nbaTeams: NBATEAMS,
       college: COLLEGE,
       players: PLAYERS,
-      selectedNbaTeams: []
+      selectedNbaTeams: [],
+      searchInput: "",
+      filteredColleges: []
     };
     this.handleSelectNbaTeams = this.handleSelectNbaTeams.bind(this);
   }
+  
+  searchOnChange = (e) => {
+     this.setState({
+       searchInput: e.target.value
+     });
+     //creates array of filtered colleges based on search input
+     const filteredColleges = 
+      this.state.college.filter(school => {
+        return school.toLowerCase().includes(this.state.searchInput.toLowerCase());
+      });
+      this.setState({
+        filteredColleges: filteredColleges,
+      });
+      console.log("App component: this.state.filteredColleges ", this.state.filteredColleges);
+   };
 
   //update which nba team to render on page
   handleSelectNbaTeams = selectedNbaTeam => {
@@ -35,11 +53,17 @@ class App extends Component {
   };
 
   render() {
-    const { players, nbaTeams, selectedNbaTeams } = this.state;
-    const { handleSelectNbaTeams } = this;
+    const { college, players, nbaTeams, searchInput, selectedNbaTeams } = this.state;
+    const { searchOnChange, handleSelectNbaTeams } = this;
     return (
       <div>
         <h1>Mock Draft</h1>
+        <div>
+          <SearchBar 
+            searchOnChange={searchOnChange} 
+            searchInput={searchInput}
+          />
+        </div>
         <PlayerDropdown
           nbaTeams={this.state.nbaTeams}
           college={this.state.college}
