@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import PlayerDropdown from "./PlayerDropdown";
 import "./App.css";
+import PlayerDropdown from "./PlayerDropdown";
 import PlayerList from "./PlayerList";
+import TeamDropdown from "./TeamDropdown";
+import NbaTeam from "./NbaTeam";
 import SearchBar from "./SearchBar";
 
 const NBATEAMS = ["Lakers", "Warriors", "Cavs", "Bucks", "Clippers"];
@@ -21,9 +23,11 @@ class App extends Component {
       nbaTeams: NBATEAMS,
       college: COLLEGE,
       players: PLAYERS,
+      selectedNbaTeams: [],
       searchInput: "",
       filteredColleges: []
     };
+    this.handleSelectNbaTeams = this.handleSelectNbaTeams.bind(this);
   }
   
   searchOnChange = (e) => {
@@ -41,21 +45,36 @@ class App extends Component {
       console.log("App component: this.state.filteredColleges ", this.state.filteredColleges);
    };
 
+  //update which nba team to render on page
+  handleSelectNbaTeams = selectedNbaTeam => {
+    this.setState({
+      selectedNbaTeams: this.state.selectedNbaTeams.concat([selectedNbaTeam])
+    });
+  };
+
   render() {
-    const { college, players, nbaTeams, searchInput } = this.state;
-    const { searchOnChange } = this;
+    const { college, players, nbaTeams, searchInput, selectedNbaTeams } = this.state;
+    const { searchOnChange, handleSelectNbaTeams } = this;
     return (
       <div>
         <h1>Mock Draft</h1>
         <div>
-          <SearchBar searchOnChange={searchOnChange} searchInput={searchInput}/>
+          <SearchBar 
+            searchOnChange={searchOnChange} 
+            searchInput={searchInput}
+          />
         </div>
-        <div>
-          <PlayerDropdown nbaTeams={nbaTeams} college={college} players={players}/>
-        </div>
-        <div>
-          <PlayerList players={players} />
-        </div>
+        <PlayerDropdown
+          nbaTeams={this.state.nbaTeams}
+          college={this.state.college}
+          players={this.state.players}
+        />
+        <PlayerList players={players} />
+        <TeamDropdown
+          nbaTeams={nbaTeams}
+          handleSelectNbaTeams={handleSelectNbaTeams}
+        />
+        <NbaTeam selectedNbaTeams={selectedNbaTeams} />
       </div>
     );
   }
