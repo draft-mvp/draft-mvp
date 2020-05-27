@@ -4,13 +4,19 @@ export default class NbaTeam extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      listOfPlayers: []
+      listOfPlayers: [],
     };
   }
 
   render() {
-    const { selectedNbaTeams } = this.props;
-    return <div>{selectedNbaTeams}
-    </div>;
+    const { selectedNbaTeams, selected } = this.props;
+    if(!selected) {
+      return <div>{selectedNbaTeams}</div>;
+    } else {
+      return <div>
+        {selectedNbaTeams}
+        
+      </div>
+    }
   }
 }

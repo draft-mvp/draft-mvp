@@ -6,10 +6,10 @@ class PlayerDropdown extends Component {
     super(props);
     this.state = {};
 
-   // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   render() {
+    const {handleSelectedPlayers} = this.props;
     return (
       <div>
         Player Dropdown Component!
@@ -20,7 +20,7 @@ class PlayerDropdown extends Component {
             {this.props.players ? this.props.players.map((player) => <option key={player} value={player}>{player}</option>) : undefined}
           </select>
         </label>
-        <input type="submit" value="Submit" />
+        <input type="button" value="Submit" onClick={handleSelectedPlayers}/>
       </form>
       </div>
     );

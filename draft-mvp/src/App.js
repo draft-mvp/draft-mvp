@@ -22,7 +22,9 @@ class App extends Component {
       nbaTeams: NBATEAMS,
       college: COLLEGE,
       players: PLAYERS,
-      selectedNbaTeams: []
+      selectedNbaTeams: [],
+      selected: false,
+      selectedPlayers: ["Lebron James"]
     };
   }
 
@@ -33,9 +35,24 @@ class App extends Component {
     });
   };
 
+  //handle which NBA team to add selected players to
+  handleSelectedTeam = () => {
+    this.setState(prevState => ({
+      selected: !prevState.selected
+    }));
+  };
+
+  //populate list of selected players arr with selected player from dropdown
+  handleSelectPlayers = selectedPlayer => {
+    console.log('selectedPlayer', selectedPlayer)
+    this.setState({
+      selectedPlayers: this.state.selectedPlayers.concat([selectedPlayer])
+    })
+  }
+
   render() {
-    const { players, nbaTeams, selectedNbaTeams } = this.state;
-    const { handleSelectNbaTeams } = this;
+    const { players, nbaTeams, selectedNbaTeams, selected, selectedPlayers } = this.state;
+    const { handleSelectNbaTeams, handleSelectedTeam, handleSelectedPlayers } = this;
     return (
       <div>
         <h1>Mock Draft</h1>
@@ -43,6 +60,7 @@ class App extends Component {
           nbaTeams={this.state.nbaTeams}
           college={this.state.college}
           players={this.state.players}
+          handleSelectedPlayers={handleSelectedPlayers}
         />
         <PlayerList players={players} />
         <TeamDropdown
@@ -50,7 +68,7 @@ class App extends Component {
           handleSelectNbaTeams={handleSelectNbaTeams}
           selectedNbaTeams={selectedNbaTeams}
         />
-        <NbaTeam selectedNbaTeams={selectedNbaTeams} />
+        <NbaTeam selectedNbaTeams={selectedNbaTeams} selected={selected} onClick={handleSelectedTeam} selectedPlayers={selectedPlayers}/>
       </div>
     );
   }
