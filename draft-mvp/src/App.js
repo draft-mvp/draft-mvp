@@ -24,7 +24,6 @@ class App extends Component {
       players: PLAYERS,
       selectedNbaTeams: []
     };
-    this.handleSelectNbaTeams = this.handleSelectNbaTeams.bind(this);
   }
 
   //update which nba team to render on page
@@ -49,6 +48,7 @@ class App extends Component {
         <TeamDropdown
           nbaTeams={nbaTeams}
           handleSelectNbaTeams={handleSelectNbaTeams}
+          selectedNbaTeams={selectedNbaTeams}
         />
         <NbaTeam selectedNbaTeams={selectedNbaTeams} />
       </div>

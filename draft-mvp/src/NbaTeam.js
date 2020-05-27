@@ -10,6 +10,7 @@ export default class NbaTeam extends Component {
 
   render() {
     const { selectedNbaTeams } = this.props;
-    return <div>{selectedNbaTeams}</div>;
+    return <div>{selectedNbaTeams}
+    </div>;
   }
 }
